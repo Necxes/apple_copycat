@@ -118,7 +118,7 @@ const VideoCarousel = () => {
         }
     }, [startPlay, videoId, isPlaying, loadedData])
 
-    const handleLoadedMetadata =  (i, e) => setLoadedData((pre) => [...pre, e]);
+    const handleLoadedMetaData =  (i, e) => setLoadedData((pre) => [...pre, e]);
 
     const handleProcess = (type, i) => {
         switch (type) {
@@ -137,7 +137,6 @@ const VideoCarousel = () => {
             case 'pause':
                 setVideo((pre) => ({ ...pre, isPlaying: !pre.isPlaying}))
                 break;
-
             default:
                 break;
         }
@@ -157,13 +156,11 @@ const VideoCarousel = () => {
                                     muted
                                     className={`${list.id === 2 && 'translate-x-44'} pointer-events-none`}
                                     ref={(el) => (videoRef.current[i] = el)}
-                                    onPlay={() => {
-                                        setVideo((prevVideo) => ({
-                                            ...prevVideo, isPlaying: true
-                                        }))
-                                    }}
+                                    onPlay={() => 
+                                        setVideo((pre) => ({...pre, isPlaying: true }))
+                                    }
                                     onEnded={() => i !== 3 ? handleProcess('video-end', i) : handleProcess('video-last')}
-                                    onLoadedMetadata={(e) => handleLoadedMetadata(i, e)}
+                                    onLoadedMetadata={(e) => handleLoadedMetaData(i, e)}
                                 >
                                     <source src={list.video} type="video/mp4" />
                                 </video>
