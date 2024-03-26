@@ -11,5 +11,17 @@ export default defineConfig({
 
   build: {
     sourcemap: true
-  }
+  },
+  plugins: [
+    react(),
+
+    // Put the Sentry vite plugin after all other plugins
+    sentryVitePlugin({
+      org: process.env.SENTRY_ORG,
+      project: process.env.SENTRY_PROJECT,
+
+      // Auth tokens can be obtained from https://sentry.io/orgredirect/organizations/:orgslug/settings/auth-tokens/
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+    }),
+  ],
 })
